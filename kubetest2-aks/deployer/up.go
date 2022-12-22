@@ -32,7 +32,6 @@ import (
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore/arm"
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore/policy"
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore/streaming"
-	"github.com/Azure/azure-sdk-for-go/sdk/azidentity"
 	armcontainerservicev2 "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/containerservice/armcontainerservice/v2"
 	"github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/resources/armresources"
 	"github.com/Azure/go-autorest/autorest/to"
@@ -63,6 +62,7 @@ type UpOptions struct {
 	AzureFileImageTag  string `flag:"azureFileImageTag" desc:"--azureFileImageTag flag for Azure file image tag"`
 	KubernetesImageTag string `flag:"kubernetesImageTag" desc:"--kubernetesImageTag flag for Kubernetes image tag"`
 	KubeletURL         string `flag:"kubeletURL" desc:"--kubeletURL flag for kubelet binary URL"`
+	CASImageTag        string `flag:"casImageTag" desc:"--casImageTag flag for CAS image tag"`
 }
 
 type enableCustomFeaturesPolicy struct{}
@@ -199,6 +199,7 @@ func (d *deployer) prepareCustomConfig() ([]byte, error) {
 	imageMap["{CUSTOM_KUBE_PROXY_IMAGE}"] = fmt.Sprintf("%s/kube-proxy:%s", prefix, d.KubernetesImageTag)
 	imageMap["{CUSTOM_KUBE_SCHEDULER_IMAGE}"] = fmt.Sprintf("%s/kube-scheduler:%s", prefix, d.KubernetesImageTag)
 	imageMap["{CUSTOM_KUBELET_URL}"] = d.KubeletURL
+	imageMap["{CUSTOM_CAS_IMAGE}"] = d.CASImageTag
 
 	for k, v := range imageMap {
 		customConfig = bytes.ReplaceAll(customConfig, []byte(k), []byte(v))

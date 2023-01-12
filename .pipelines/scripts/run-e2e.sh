@@ -87,7 +87,7 @@ else
 fi
 
 rm -rf kubetest2-aks
-git clone https://github.com/kubernetes-sigs/cloud-provider-azure.git
+git clone --single-branch --branch "cas_config_setup" "https://github.com/aagusuab/cloud-provider-azure" ${CLONE_PATH}
 cp -r cloud-provider-azure/kubetest2-aks .
 rm -rf cloud-provider-azure
 git config --global --add safe.directory "$(pwd)" || true

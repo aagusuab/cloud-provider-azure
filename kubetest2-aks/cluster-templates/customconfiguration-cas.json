@@ -8,6 +8,7 @@
         "--scale-down-unneeded-time": "1m",
         "--scale-down-unready-time": "2m",
         "--v": "4"
+        "--balance-similar-node-groups": "true"
       }
     }
   }

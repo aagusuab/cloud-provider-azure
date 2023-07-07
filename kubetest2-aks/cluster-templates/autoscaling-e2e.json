@@ -19,9 +19,6 @@
         "minCount": 1
       }
     ],
-    "autoScalerProfile": {
-      "balance-similar-node-groups": "true"
-    },
     "servicePrincipalProfile": {
       "clientId": "{AZURE_CLIENT_ID}",
       "secret": "{AZURE_CLIENT_SECRET}"
